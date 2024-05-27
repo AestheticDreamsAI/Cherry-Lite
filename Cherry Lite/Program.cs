@@ -14,7 +14,7 @@ class Program
     public static AudioListener audioListener;
     static async Task Main(string[] args)
     {
-        AI.init("cherry","en");
+        AI.init("cherry","en","llama3");
         if (!File.Exists(".\\data\\"))
             Directory.CreateDirectory(".\\data\\");
 

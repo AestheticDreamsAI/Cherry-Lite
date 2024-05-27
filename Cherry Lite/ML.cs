@@ -99,7 +99,7 @@ public class ML
         return predictionEngine.Predict(new IntentData { Text = text });
     }
 
-    public static string GenerateResponse(string ollamaModel, string tag, IntentCollection intents)
+    public static string GenerateResponse(string tag, IntentCollection intents)
     {
         var intent = intents.Intents.FirstOrDefault(i => i.Tag == tag);
         if (intent != null)
@@ -135,7 +135,7 @@ public class ML
         return false;
     }
 
-    public static async Task Run(MLContext mlContext, ITransformer model, IntentCollection intents, string ollamaModel = "llama3")
+    public static async Task Run(MLContext mlContext, ITransformer model, IntentCollection intents)
     {
         while (true)
         {
@@ -144,9 +144,9 @@ public class ML
             string userInput = Console.ReadLine();
             if (userInput.ToLower() == "exit")
                 break;
-            OllamaResponse = await AI.GetResponse(ollamaModel, userInput);
+            OllamaResponse = await AI.GetResponse(userInput);
             var prediction = Predict(mlContext, model, OllamaResponse);
-            var response = GenerateResponse(ollamaModel, prediction.PredictedLabel, intents);
+            var response = GenerateResponse(prediction.PredictedLabel, intents);
 
 
             var audio = await AI.xttsRequestAndPlay(OllamaResponse);
@@ -156,20 +156,20 @@ public class ML
         }
     }
 
-    public static async Task Run2(MLContext mlContext, ITransformer model, IntentCollection intents, string userInput, string ollamaModel = "llama3")
+    public static async Task Run2(MLContext mlContext, ITransformer model, IntentCollection intents, string userInput)
     {
         try
         {
             Console.WriteLine($"You: {userInput}");
 
             // Get the response from the AI model
-            var ollamaResponse = await AI.GetResponse(ollamaModel, userInput);
+            var ollamaResponse = await AI.GetResponse(userInput);
 
             // Perform prediction
             var prediction = Predict(mlContext, model, ollamaResponse);
 
             // Generate a response based on the prediction
-            var response = GenerateResponse(ollamaModel, prediction.PredictedLabel, intents);
+            var response = GenerateResponse(prediction.PredictedLabel, intents);
 
             // Request and play audio
             var audioFilePath = await AI.xttsRequestAndPlay(ollamaResponse);

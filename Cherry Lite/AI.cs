@@ -11,14 +11,16 @@ public class AI
 
     public static HttpClient client = new HttpClient();
     static string system = "";
-    static string speaker = "";
+    static string speaker = "cherry";
     static string language = "en";
+    static string model = "llama3";
 
-    public static void init(string xttsSpeaker, string lang, string systemPrompt= "You are Cherry A.I., an advanced offline assistant based on LAMBot, a Language Action Model bot designed for recognizing user intents and executing specific actions. As an open source AI, you are designed to recognize user intents, execute specific actions like launching programs, and provide helpful responses. Answer the user's input in no more than three sentences, always addressing them as Sir. Respond only with the dialogue, nothing else.")
+    public static void init(string xttsSpeaker, string lang, string ollamaModel="llama3", string systemPrompt= "You are Cherry A.I., an advanced offline assistant based on LAMBot, a Language Action Model bot designed for recognizing user intents and executing specific actions. As an open source AI, you are designed to recognize user intents, execute specific actions like launching programs, and provide helpful responses. Answer the user's input in no more than three sentences, always addressing them as Sir. Respond only with the dialogue, nothing else.")
     {
         system = systemPrompt;
         speaker = xttsSpeaker;
         language = lang;
+        model = ollamaModel;
         client.Timeout = TimeSpan.FromMinutes(10);
     }
 
@@ -43,7 +45,7 @@ public class AI
 
 
 
-    public static async Task<string> GetResponse(string model,string prompt)
+    public static async Task<string> GetResponse(string prompt)
     {
         if (string.IsNullOrEmpty(prompt))
             return string.Empty;
