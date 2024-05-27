@@ -1,5 +1,3 @@
-Based on the project structure you have shown, here’s an updated README for the Cherry-Lite project, incorporating the latest features from v0.3 and aligning with the project files:
-
 # Cherry-Lite (Work in Progress)
 
 Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI framework. This project combines the main features of LAMBot-AI with additional functionalities powered by xtts-api-server, Ollama, Whisper.net, and plugin support.
