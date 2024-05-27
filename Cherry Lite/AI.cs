@@ -63,10 +63,10 @@ public class AI
     }
 
 
-    public static void init(string n = "lily", string l = "en")
+    public static void init(string model = "lily", string language = "en")
     {
-        lang = l;
-        ainame = n;
+        lang = language;
+        ainame = model;
         client.Timeout = TimeSpan.FromMinutes(10);
     }
 
