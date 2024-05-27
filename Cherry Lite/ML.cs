@@ -109,7 +109,7 @@ public class ML
             var response = intent.Responses[index];
             return response;
         }
-        return "Sorry, I don't understand.";
+        return "";
     }
 
     public static void ExecuteAction(string tag, IntentCollection intents)
@@ -136,6 +136,7 @@ public class ML
     {
         while (true)
         {
+            var OllamaResponse = "";
             Console.Write("You: ");
             string userInput = Console.ReadLine();
             if (userInput.ToLower() == "exit")
@@ -143,7 +144,9 @@ public class ML
 
             var prediction = Predict(mlContext, model, userInput);
             var response = GenerateResponse(ollamaModel,prediction.PredictedLabel, intents);
-            var OllamaResponse = await AI.GetResponse(ollamaModel, $"Say the following with your own Words: '{response}'.");
+            if(!string.IsNullOrEmpty(response))
+                OllamaResponse = await AI.GetResponse(ollamaModel, $"Say the following with your own Words: '{response}'.");
+            else OllamaResponse = await AI.GetResponse(ollamaModel, userInput);
             await AI.xttsRequestAndPlay(OllamaResponse);
             Console.WriteLine("Bot: " + OllamaResponse);
 
