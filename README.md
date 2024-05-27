@@ -47,7 +47,6 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
 3. **Set up additional services:**
 
     - Follow the instructions to set up [xtts-api-server](https://github.com/daswer123/xtts-api-server)
-    - Set up [Whisper.net](https://github.com/sandrohanea/whisper.net)
     - Install [Ollama](https://ollama.com/)
 
 ### Usage
