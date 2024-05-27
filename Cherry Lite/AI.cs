@@ -11,7 +11,7 @@ public class AI
 
     public static HttpClient client = new HttpClient();
 
-    static string ainame = "lily";
+    static string ainame = "llama3";
     static string lang = "en";
     static string system = "";
 
