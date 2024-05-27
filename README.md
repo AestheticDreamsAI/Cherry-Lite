@@ -15,6 +15,7 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
 - **Advanced NLP**: Incorporates ChatGPT or Ollama for more sophisticated natural language processing and understanding.
 - **Speech Recognition**: Integrates with Whisper.net for accurate speech-to-text conversion.
 - **Plugin Support**: Allows for extensibility through various plugins to add new functionalities.
+- **Audio Playback**: Uses NAudio to play text-to-speech audio responses.
 
 ## Getting Started
 
@@ -40,6 +41,7 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
     dotnet add package Microsoft.ML
     dotnet add package Microsoft.ML.DataView
     dotnet add package Newtonsoft.Json
+    dotnet add package NAudio.Lite
     ```
 
 3. **Set up additional services:**
@@ -98,9 +100,10 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
             "Run Notepad"
           ],
           "responses": [
-            "Starting Notepad",
-            "Opening Notepad",
-            "Launching Notepad"
+            "I will start Notepad.",
+            "I am starting Notepad.",
+            "Notepad is being started.",
+            "Let me start Notepad."
           ],
           "actions": [
             "notepad.exe"
@@ -115,9 +118,10 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
             "Run browser"
           ],
           "responses": [
-            "Starting browser",
-            "Opening browser",
-            "Launching browser"
+            "I will start the browser.",
+            "I am starting the browser.",
+            "The browser is being started.",
+            "Let me start the browser."
           ],
           "actions": [
             "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
@@ -160,3 +164,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Newtonsoft.Json](https://www.newtonsoft.com/json) - JSON framework for .NET
 - [xtts-api-server](https://github.com/daswer123/xtts-api-server) - Text-to-speech API server
 - [Whisper.net](https://github.com/sandrohanea/whisper.net) - Speech recognition framework
+- [NAudio](https://github.com/naudio/NAudio) - Audio playback framework for .NET
