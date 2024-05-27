@@ -216,5 +216,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [xtts-api-server](https://github.com/daswer123/xtts-api-server) - Text-to-speech API server
 - [Whisper.net](https://github.com/sandrohanea/whisper.net) - Speech recognition framework
 - [NAudio](https://github.com/naudio/NAudio) - Audio playback framework for .NET
-
-By following these steps, you should have Cherry-Lite up and running with Ollama and the XTTS API Server properly configured. If you encounter any issues, consult the respective GitHub repositories for troubleshooting and support.
