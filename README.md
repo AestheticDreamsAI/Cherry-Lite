@@ -57,46 +57,80 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
     Create a file named `intents.json` in the project directory with the following content:
 
     ```json
+ {
+  "intents": [
     {
-      "intents": [
-        {
-          "tag": "start_program",
-          "patterns": [
-            "Open Notepad",
-            "Start Notepad",
-            "Launch Notepad",
-            "Run Notepad"
-          ],
-          "responses": [
-            "I will start Notepad.",
-            "I am starting Notepad.",
-            "Notepad is being started.",
-            "Let me start Notepad."
-          ],
-          "actions": [
-            "notepad.exe"
-          ]
-        },
-        {
-          "tag": "start_browser",
-          "patterns": [
-            "Open browser",
-            "Start browser",
-            "Launch browser",
-            "Run browser"
-          ],
-          "responses": [
-            "I will start the browser.",
-            "I am starting the browser.",
-            "The browser is being started.",
-            "Let me start the browser."
-          ],
-          "actions": [
-            "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
-          ]
-        }
+      "tag": "greeting",
+      "patterns": [
+        "Hi",
+        "Hey",
+        "How are you",
+        "Is anyone there?",
+        "Hello",
+        "Good day"
+      ],
+      "responses": [
+        "Hey :-)",
+        "Hello, thanks for visiting",
+        "Hi there, what can I do for you?",
+        "Hi there, how can I help?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye",
+        "See you later",
+        "Goodbye",
+        "Have a nice day"
+      ],
+      "responses": [
+        "Goodbye!",
+        "See you later!",
+        "Have a great day!",
+        "Bye! Come back soon."
+      ]
+    },
+    {
+      "tag": "start_program",
+      "patterns": [
+        "Open Notepad",
+        "Start Notepad",
+        "Launch Notepad",
+        "Run Notepad"
+      ],
+{
+  "responses": [
+    "I will start Notepad for you.",
+    "I am starting Notepad for you.",
+    "Notepad is being started for you.",
+    "Let me start Notepad for you."
+  ],
+      "actions": [
+        "notepad.exe"
+      ]
+    },
+    {
+      "tag": "start_browser",
+      "patterns": [
+        "Open browser",
+        "Start browser",
+        "Launch browser",
+        "Run browser"
+      ],
+  "responses": [
+    "I will start the browser for you.",
+    "I am starting the browser for you.",
+    "The browser is being started for you.",
+    "Let me start the browser for you."
+  ],
+      "actions": [
+        "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
       ]
     }
+  ]
+}
+
     ```
 
 2. **Run the application:**
