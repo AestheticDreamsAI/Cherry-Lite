@@ -15,16 +15,16 @@ public class AI
     static string lang = "en";
     static string system = "";
 
-    public static async Task<string> GetVision(string prompt, string imgDataUri)
+    public static async Task<string> GetVision(string prompt, string imgDataUri, string model)
     {
         if (string.IsNullOrEmpty(prompt))
             return string.Empty;
         prompt = $"{prompt}";
-        string url = "https://aestheticdreams.ngrok.app/api/generate";
+        string url = "https://localhost:11434/api/generate";
 
         var jsonData = JsonConvert.SerializeObject(new
         {
-            model = "llava-llama3",
+            model = model,
             stream = false,
             prompt = $"{prompt}",
             images = new[] { imgDataUri }
@@ -63,7 +63,7 @@ public class AI
     }
 
 
-    public static void init(string model = "lily", string language = "en")
+    public static void init(string model = "llama3", string language = "en")
     {
         lang = language;
         ainame = model;
