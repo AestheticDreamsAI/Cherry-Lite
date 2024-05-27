@@ -99,14 +99,15 @@ public class ML
         return predictionEngine.Predict(new IntentData { Text = text });
     }
 
-    public static string GenerateResponse(string tag, IntentCollection intents)
+    public static string GenerateResponse(string ollamaModel, string tag, IntentCollection intents)
     {
         var intent = intents.Intents.FirstOrDefault(i => i.Tag == tag);
         if (intent != null)
         {
             Random rnd = new Random();
             int index = rnd.Next(intent.Responses.Count);
-            return intent.Responses[index];
+            var response = intent.Responses[index];
+            return response;
         }
         return "Sorry, I don't understand.";
     }
@@ -131,7 +132,7 @@ public class ML
         }
     }
 
-    public static void Run(MLContext mlContext, ITransformer model, IntentCollection intents)
+    public static async Task Run(MLContext mlContext,ITransformer model, IntentCollection intents, string ollamaModel = "llama3")
     {
         while (true)
         {
@@ -140,11 +141,13 @@ public class ML
             if (userInput.ToLower() == "exit")
                 break;
 
-            var prediction = ML.Predict(mlContext, model, userInput);
-            var response = ML.GenerateResponse(prediction.PredictedLabel, intents);
-            Console.WriteLine("Bot: " + response);
+            var prediction = Predict(mlContext, model, userInput);
+            var response = GenerateResponse(ollamaModel,prediction.PredictedLabel, intents);
+            var OllamaResponse = await AI.GetResponse(ollamaModel, $"Say the following with your own Words: '{response}'.");
+            await AI.xttsRequestAndPlay(OllamaResponse);
+            Console.WriteLine("Bot: " + OllamaResponse);
 
-            ML.ExecuteAction(prediction.PredictedLabel, intents);
+            ExecuteAction(prediction.PredictedLabel, intents);
         }
     }
 }

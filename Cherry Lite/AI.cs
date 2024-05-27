@@ -10,63 +10,15 @@ public class AI
 {
 
     public static HttpClient client = new HttpClient();
-
-    static string ainame = "llama3";
-    static string lang = "en";
     static string system = "";
+    static string speaker = "";
+    static string language = "en";
 
-    public static async Task<string> GetVision(string prompt, string imgDataUri, string model)
+    public static void init(string xttsSpeaker, string lang, string systemPrompt= "You are Cherry A.I., an advanced offline assistant based on LAMBot, a Language Action Model bot designed for recognizing user intents and executing specific actions. As an open source AI, you are designed to recognize user intents, execute specific actions like launching programs, and provide helpful responses. Answer the user's input in no more than three sentences, always addressing them as Sir. Respond only with the dialogue, nothing else.")
     {
-        if (string.IsNullOrEmpty(prompt))
-            return string.Empty;
-        prompt = $"{prompt}";
-        string url = "https://localhost:11434/api/generate";
-
-        var jsonData = JsonConvert.SerializeObject(new
-        {
-            model = model,
-            stream = false,
-            prompt = $"{prompt}",
-            images = new[] { imgDataUri }
-        });
-
-        using (var httpClient = new HttpClient())
-        {
-            httpClient.Timeout = TimeSpan.FromMinutes(10);
-            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-            try
-            {
-                HttpResponseMessage response = await httpClient.PostAsync(url, content);
-                if (response.IsSuccessStatusCode)
-                {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    var responseObj = JsonConvert.DeserializeObject<ResponseData>(responseContent);
-                    string processedResponse = responseObj.Response.Trim();
-                    if (processedResponse.Contains(":"))
-                    {
-                        if (processedResponse.Split(":")[0].Contains($"{UcFirst(ainame)}"))
-                            processedResponse = processedResponse.Split(":")[1].Trim();
-                    }
-                    return processedResponse;
-                }
-                else
-                {
-                    return $"HTTP error: {response.StatusCode}";
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                return $"HttpRequestException error: {e.Message}";
-            }
-        }
-    }
-
-
-    public static void init(string model = "llama3", string language = "en")
-    {
-        lang = language;
-        ainame = model;
+        system = systemPrompt;
+        speaker = xttsSpeaker;
+        language = lang;
         client.Timeout = TimeSpan.FromMinutes(10);
     }
 
@@ -91,12 +43,12 @@ public class AI
 
 
 
-    public static async Task<string> GetResponse(string name, string prompt, string model)
+    public static async Task<string> GetResponse(string model,string prompt)
     {
-        if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(prompt))
+        if (string.IsNullOrEmpty(prompt))
             return string.Empty;
 
-        prompt = $"{system}\nUser ({name}): {prompt}";
+        prompt = $"{system}\nUser: {prompt}";
         string url = "http://localhost:11434/api/chat";
 
         var jsonData = JsonConvert.SerializeObject(new
@@ -123,10 +75,9 @@ public class AI
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
                     var responseData = JsonConvert.DeserializeObject<ResponseData2>(responseContent);
-                    // Zugriff auf den Inhalt der Nachricht
-                    string messageContent = responseData.Message.Content; // Hier extrahieren wir den Inhalt
-                    string processedResponse = messageContent.Replace($"{UcFirst(ainame)}: ", "").Replace("Lily says: ", "").Replace($"{name}: ", "").Replace($"{name} says: ", "").Trim();
-                    return processedResponse.Replace("Lily Paminy: ", getName() + ": ");
+                    
+                    string messageContent = responseData.Message.Content;
+                    return messageContent;
                 }
                 else
                 {
@@ -140,7 +91,7 @@ public class AI
         }
     }
 
-    public static async Task<string> SendTtsRequestAndGetDataUri(string text)
+    public static async Task<string> xttsRequestAndPlay(string text)
     {
         try
         {
@@ -148,8 +99,8 @@ public class AI
             var jsonContent = new StringContent(
                 $@"{{
                 ""text"": ""{text}"",
-                ""speaker_wav"": ""{ainame.ToLower()}"",
-                ""language"": ""{lang}""
+                ""speaker_wav"": ""{speaker}"",
+                ""language"": ""{language}""
             }}", Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await client.PostAsync("https://localhost:8020/tts_to_audio/", jsonContent);
@@ -170,12 +121,9 @@ public class AI
         }
         return null;
     }
-
-    public static string getName()
-    {
-        return UcFirst(ainame);
-    }
 }
+
+
 
 public class ResponseData2
 {

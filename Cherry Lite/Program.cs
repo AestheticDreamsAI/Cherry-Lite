@@ -11,9 +11,9 @@ using Newtonsoft.Json;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
-        AI.init();
+        AI.init("cherry","en");
         if (!File.Exists(".\\data\\"))
             Directory.CreateDirectory(".\\data\\");
 
@@ -31,11 +31,11 @@ class Program
         }
         else
         {
+            //Train a new model based on intents
             model = ML.Train(mlContext,intents);
         }
 
-        Console.WriteLine("Chatbot started. Type 'exit' to quit.");
-        ML.Run(mlContext,model,intents);
+        await ML.Run(mlContext,model,intents);
     }
 
    
