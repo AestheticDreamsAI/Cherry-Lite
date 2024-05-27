@@ -19,7 +19,7 @@ Cherry-Lite is designed and optimized specifically for Windows. Compatibility wi
 
 - **Whisper Transcription**: Added the ability to transcribe speech using Whisper.
 - **Text-to-Speech Integration**: Utilizes xtts-api-server for converting text responses into speech.
-- **Advanced NLP**: Incorporates ChatGPT or Ollama for more sophisticated natural language processing and understanding.
+- **Advanced NLP**: Incorporates Ollama for more sophisticated natural language processing and understanding.
 - **Service Detection**: Improved detection and configuration for Ollama and XTTS services.
 - **Audio Playback**: Uses NAudio to play text-to-speech audio responses.
 - **Plugin Support (Coming soon)**: Allows for extensibility through various plugins to add new functionalities.
