@@ -18,7 +18,7 @@ public class AudioListener
     private readonly MLContext mlContext;
     private readonly IntentCollection intents;
     private readonly ITransformer model;
-
+    private int recordDelay = 50;
     public AudioListener(MLContext mlContext, ITransformer model, IntentCollection intents)
     {
         this.mlContext = mlContext;
@@ -78,6 +78,7 @@ public class AudioListener
         if (listening)
         {
             Console.WriteLine("Stopping recording...");
+            Console.WriteLine();
             waveIn.StopRecording();
             waveIn.Dispose(); // Dispose the waveIn to release resources
             listening = false;
@@ -91,7 +92,7 @@ public class AudioListener
         Array.Copy(e.Buffer, buffer, e.BytesRecorded);
         vadData.Enqueue(buffer);
 
-        if (vadData.Count > 5 && !isProcessing) // Prevent overlapping processing
+        if (vadData.Count > recordDelay && !isProcessing) // Prevent overlapping processing
         {
             isProcessing = true;
             Task.Run(() => ProcessAudio());

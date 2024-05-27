@@ -15,7 +15,7 @@ public class AI
     static string language = "en";
     static string model = "llama3";
 
-    public static void init(string xttsSpeaker, string lang, string ollamaModel="llama3", string systemPrompt= "You are Cherry A.I., an advanced offline assistant based on LAMBot, a Language Action Model bot designed for recognizing user intents and executing specific actions. As an open source AI, you are designed to recognize user intents, execute specific actions like launching programs, and provide helpful responses. Answer the user's input in no more than three sentences, always addressing them as Sir. Respond only with the dialogue, nothing else.")
+    public static void init(string xttsSpeaker, string lang, string ollamaModel="llama3", string systemPrompt= "You are Cherry Lite, an advanced offline assistant based on LAMBot, a Language Action Model bot designed for recognizing user intents and executing specific actions. As an open-source AI, you excel at understanding user intents, launching programs, and providing helpful responses. Answer the user's input in no more than three sentences, always addressing them as Sir. Respond only with the dialogue, nothing else.")
     {
         system = systemPrompt;
         speaker = xttsSpeaker;
@@ -48,7 +48,7 @@ public class AI
     public static async Task<string> GetResponse(string prompt)
     {
 
-        if (!HTTPCheck.status["XTTS"])
+        if (!HTTPCheck.status["Ollama"])
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("WARNING: OLLAMA - Text Generation service isnt running...");

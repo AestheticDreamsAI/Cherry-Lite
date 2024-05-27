@@ -123,6 +123,7 @@ public class ML
                 try
                 {
                     Process.Start(action);
+                    Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.WriteLine($"Executing action: {action}");
                     return true;
                 }
