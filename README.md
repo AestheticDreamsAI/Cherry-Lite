@@ -1,63 +1,51 @@
-# Cherry-Lite (Work in Progress)
-
+Cherry-Lite (Work in Progress)
 Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI framework. This project combines the main features of LAMBot-AI with additional functionalities powered by xtts-api-server, Ollama, Whisper.net, and plugin support.
 
-## Main Features
+Main Features
+Intent Recognition: Uses machine learning to classify user inputs into predefined intents.
+Action Execution: Executes specific actions, such as launching programs, based on recognized intents.
+Response Generation: Provides predefined responses for each recognized intent.
+Model Persistence: Saves and loads the trained model to avoid the need for retraining.
+Additional Features
+Text-to-Speech Integration: Utilizes xtts-api-server for converting text responses into speech.
+Advanced NLP: Incorporates ChatGPT or Ollama for more sophisticated natural language processing and understanding.
+Speech Recognition: Integrates with Whisper.net for accurate speech-to-text conversion.
+Plugin Support: Allows for extensibility through various plugins to add new functionalities.
+Audio Playback: Uses NAudio to play text-to-speech audio responses.
+Getting Started
+Prerequisites
+.NET SDK
+Visual Studio or any other C# IDE
+xtts-api-server
+Whisper.net
+Installation
+Clone the repository:
 
-- **Intent Recognition**: Uses machine learning to classify user inputs into predefined intents.
-- **Action Execution**: Executes specific actions, such as launching programs, based on recognized intents.
-- **Response Generation**: Provides predefined responses for each recognized intent.
-- **Model Persistence**: Saves and loads the trained model to avoid the need for retraining.
+sh
+Code kopieren
+git clone https://github.com/yourusername/Cherry-Lite.git
+cd Cherry-Lite
+Install the required NuGet packages:
 
-## Additional Features
+sh
+Code kopieren
+dotnet add package Microsoft.ML
+dotnet add package Microsoft.ML.DataView
+dotnet add package Newtonsoft.Json
+dotnet add package NAudio.Lite
+Set up additional services:
 
-- **Text-to-Speech Integration**: Utilizes xtts-api-server for converting text responses into speech.
-- **Advanced NLP**: Incorporates ChatGPT or Ollama for more sophisticated natural language processing and understanding.
-- **Speech Recognition**: Integrates with Whisper.net for accurate speech-to-text conversion.
-- **Plugin Support**: Allows for extensibility through various plugins to add new functionalities.
-- **Audio Playback**: Uses NAudio to play text-to-speech audio responses.
+Follow the instructions to set up xtts-api-server
+Set up Whisper.net
+Install Ollama
+Usage
+Prepare the intents.json file:
 
-## Getting Started
+Create a file named intents.json in the project directory with the following content:
 
-### Prerequisites
-
-- .NET SDK
-- Visual Studio or any other C# IDE
-- xtts-api-server
-- Whisper.net
-
-### Installation
-
-1. **Clone the repository:**
-
-    ```sh
-    git clone https://github.com/yourusername/Cherry-Lite.git
-    cd Cherry-Lite
-    ```
-
-2. **Install the required NuGet packages:**
-
-    ```sh
-    dotnet add package Microsoft.ML
-    dotnet add package Microsoft.ML.DataView
-    dotnet add package Newtonsoft.Json
-    dotnet add package NAudio.Lite
-    ```
-
-3. **Set up additional services:**
-
-    - Follow the instructions to set up [xtts-api-server](https://github.com/daswer123/xtts-api-server)
-    - Set up [Whisper.net](https://github.com/sandrohanea/whisper.net)
-    - Install [Ollama](https://ollama.com/)
-
-### Usage
-
-1. **Prepare the `intents.json` file:**
-
-    Create a file named `intents.json` in the project directory with the following content:
-
-    ```json
- {
+json
+Code kopieren
+{
   "intents": [
     {
       "tag": "greeting",
@@ -99,13 +87,12 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
         "Launch Notepad",
         "Run Notepad"
       ],
-{
-  "responses": [
-    "I will start Notepad for you.",
-    "I am starting Notepad for you.",
-    "Notepad is being started for you.",
-    "Let me start Notepad for you."
-  ],
+      "responses": [
+        "I will start Notepad.",
+        "I am starting Notepad.",
+        "Notepad is being started.",
+        "Let me start Notepad."
+      ],
       "actions": [
         "notepad.exe"
       ]
@@ -118,52 +105,42 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
         "Launch browser",
         "Run browser"
       ],
-  "responses": [
-    "I will start the browser for you.",
-    "I am starting the browser for you.",
-    "The browser is being started for you.",
-    "Let me start the browser for you."
-  ],
+      "responses": [
+        "I will start the browser.",
+        "I am starting the browser.",
+        "The browser is being started.",
+        "Let me start the browser."
+      ],
       "actions": [
         "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
       ]
     }
   ]
 }
+Run the application:
 
-    ```
+sh
+Code kopieren
+dotnet run
+Interact with Cherry-Lite:
 
-2. **Run the application:**
-
-    ```sh
-    dotnet run
-    ```
-
-3. **Interact with Cherry-Lite:**
-
-    - Type `Hi` or `Hello` to receive a greeting.
-    - Type `Open Notepad` to launch Notepad.
-    - Type `Open browser` to launch your default browser.
-    - Type `exit` to quit the chatbot.
-
-## Project Structure
-
-- **Program.cs**: Main program file containing the logic for training, saving, loading the model, and handling user interactions.
-- **intents.json**: JSON file containing the intents, patterns, responses, and actions.
-- **Plugins**: Directory for additional plugins to extend functionalities.
-
-## Contributing
-
+Type Hi or Hello to receive a greeting.
+Type Open Notepad to launch Notepad.
+Type Open browser to launch your default browser.
+Type exit to quit the chatbot.
+Project Structure
+Program.cs: Main program file containing the logic for training, saving, loading the model, and handling user interactions.
+intents.json: JSON file containing the intents, patterns, responses, and actions.
+Plugins: Directory for additional plugins to extend functionalities.
+Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-- [ML.NET](https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet) - Machine Learning framework for .NET
-- [Newtonsoft.Json](https://www.newtonsoft.com/json) - JSON framework for .NET
-- [xtts-api-server](https://github.com/daswer123/xtts-api-server) - Text-to-speech API server
-- [Whisper.net](https://github.com/sandrohanea/whisper.net) - Speech recognition framework
-- [NAudio](https://github.com/naudio/NAudio) - Audio playback framework for .NET
+Acknowledgements
+ML.NET - Machine Learning framework for .NET
+Newtonsoft.Json - JSON framework for .NET
+xtts-api-server - Text-to-speech API server
+Whisper.net - Speech recognition framework
+NAudio - Audio playback framework for .NET
