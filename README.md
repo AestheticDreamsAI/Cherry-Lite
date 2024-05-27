@@ -1,7 +1,10 @@
 # Cherry-Lite (Work in Progress)
 
 Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI framework. This project combines the main features of LAMBot-AI with additional functionalities powered by xtts-api-server, Ollama, Whisper.net, and plugin support.
-![Cherry-Lite Preview](root/preview.gif)
+
+## Peview
+![Cherry-Lite Preview](https://aestheticdreams.ai/images/cherrylite.gif)
+
 ## NOT TESTED ON LINUX OR MAC
 Cherry-Lite is designed and optimized specifically for Windows. Compatibility with Linux and Mac systems has not been tested or verified.
 
