@@ -15,8 +15,8 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
 - **Text-to-Speech Integration**: Utilizes xtts-api-server for converting text responses into speech.
 - **Advanced NLP**: Incorporates ChatGPT or Ollama for more sophisticated natural language processing and understanding.
 - **Service Detection**: Improved detection and configuration for Ollama and XTTS services.
-- **Plugin Support**: Allows for extensibility through various plugins to add new functionalities.
 - **Audio Playback**: Uses NAudio to play text-to-speech audio responses.
+- **Plugin Support (Coming soon)**: Allows for extensibility through various plugins to add new functionalities.
 
 ## Getting Started
 
