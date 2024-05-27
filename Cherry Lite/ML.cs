@@ -149,7 +149,8 @@ public class ML
             var response = GenerateResponse(ollamaModel,prediction.PredictedLabel, intents);
 
 
-            await AI.xttsRequestAndPlay(OllamaResponse);
+            var audio = await AI.xttsRequestAndPlay(OllamaResponse);
+            NaudioToolkit.PlayAudio(audio);
             Console.WriteLine("Bot: " + OllamaResponse);
             ExecuteAction(prediction.PredictedLabel, intents);
         }

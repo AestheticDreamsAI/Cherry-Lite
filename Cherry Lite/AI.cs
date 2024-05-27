@@ -103,15 +103,14 @@ public class AI
                 ""language"": ""{language}""
             }}", Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PostAsync("https://localhost:8020/tts_to_audio/", jsonContent);
+            HttpResponseMessage response = await client.PostAsync("http://localhost:8020/tts_to_audio/", jsonContent);
             response.EnsureSuccessStatusCode();
             string result = System.IO.Path.GetTempPath() + $"\\{Guid.NewGuid().ToString()}.mp3";
             var bytes = await response.Content.ReadAsByteArrayAsync();
 
-            var uri = Convert.ToBase64String(bytes);
             await File.WriteAllBytesAsync(result, bytes);
+            
 
-            // Convert MP3 to OPUS format
             //
             return result;
         }
