@@ -13,6 +13,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        AI.init();
         if (!File.Exists(".\\data\\"))
             Directory.CreateDirectory(".\\data\\");
 
