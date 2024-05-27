@@ -135,7 +135,7 @@ public class ML
         return false;
     }
 
-    public static async Task Run(MLContext mlContext,ITransformer model, IntentCollection intents, string ollamaModel = "llama3")
+    public static async Task Run(MLContext mlContext, ITransformer model, IntentCollection intents, string ollamaModel = "llama3")
     {
         while (true)
         {
@@ -146,7 +146,7 @@ public class ML
                 break;
             OllamaResponse = await AI.GetResponse(ollamaModel, userInput);
             var prediction = Predict(mlContext, model, OllamaResponse);
-            var response = GenerateResponse(ollamaModel,prediction.PredictedLabel, intents);
+            var response = GenerateResponse(ollamaModel, prediction.PredictedLabel, intents);
 
 
             var audio = await AI.xttsRequestAndPlay(OllamaResponse);
@@ -155,4 +155,42 @@ public class ML
             ExecuteAction(prediction.PredictedLabel, intents);
         }
     }
+
+    public static async Task Run2(MLContext mlContext, ITransformer model, IntentCollection intents, string userInput, string ollamaModel = "llama3")
+    {
+        try
+        {
+            Console.WriteLine($"You: {userInput}");
+
+            // Get the response from the AI model
+            var ollamaResponse = await AI.GetResponse(ollamaModel, userInput);
+
+            // Perform prediction
+            var prediction = Predict(mlContext, model, ollamaResponse);
+
+            // Generate a response based on the prediction
+            var response = GenerateResponse(ollamaModel, prediction.PredictedLabel, intents);
+
+            // Request and play audio
+            var audioFilePath = await AI.xttsRequestAndPlay(ollamaResponse);
+            Console.WriteLine("Bot: " + ollamaResponse);
+            // Execute any actions based on the prediction
+            ExecuteAction(prediction.PredictedLabel, intents);
+
+            if (!string.IsNullOrEmpty(audioFilePath))
+            {
+                await Task.Run(() => NaudioToolkit.PlayAudio(audioFilePath)); // Ensure it waits for playback to complete
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error in Run2: {ex.Message}");
+        }
+        finally
+        {
+            Console.WriteLine("Restarting listener...");
+            Program.audioListener.StartListening();
+        }
+    }
+
 }

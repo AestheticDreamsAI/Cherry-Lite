@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 
 class Program
 {
+    public static AudioListener audioListener;
     static async Task Main(string[] args)
     {
         AI.init("cherry","en");
@@ -34,8 +35,26 @@ class Program
             //Train a new model based on intents
             model = ML.Train(mlContext,intents);
         }
+        audioListener = new AudioListener(mlContext, model, intents);
+        audioListener.StartListening();
+        //await ML.Run(mlContext,model,intents);
+        while (true)
+        {
+            var key = Console.ReadKey(true).KeyChar;
 
-        await ML.Run(mlContext,model,intents);
+            if (key == 's')
+            {
+                audioListener.StartListening();
+            }
+            else if (key == 't')
+            {
+                audioListener.StopListening();
+            }
+            else if (key == 'q')
+            {
+                break;
+            }
+        }
     }
 
    

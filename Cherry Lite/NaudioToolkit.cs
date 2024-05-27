@@ -1,28 +1,32 @@
 ﻿using NAudio.Wave;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-
-    internal class NaudioToolkit
-    {
+public static class NaudioToolkit
+{
     public static void PlayAudio(string filePath)
     {
-        if (string.IsNullOrEmpty(filePath)) return;
-        WaveOutEvent outputDevice = new WaveOutEvent();
-        AudioFileReader audioFile = new AudioFileReader(filePath);
+        if (File.Exists(filePath))
+        {
+            using (var audioFile = new AudioFileReader(filePath))
+            using (var outputDevice = new WaveOutEvent())
+            {
+                var tcs = new TaskCompletionSource<bool>();
 
-        outputDevice.Init(audioFile);
-        // Event-Handler für PlaybackStopped hinzufügen
-        outputDevice.PlaybackStopped += (sender, args) =>
-        { 
-            // Aufräumen
-            audioFile.Dispose();
-            outputDevice.Dispose();
-        };
+                outputDevice.Init(audioFile);
+                outputDevice.PlaybackStopped += (s, e) =>
+                {
+                    tcs.SetResult(true);
+                };
 
-        outputDevice.Play();
+                outputDevice.Play();
+                tcs.Task.Wait(); // Wait for playback to complete
+
+                outputDevice.Dispose();
+                audioFile.Dispose();
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Audio file not found: {filePath}");
+        }
     }
 }
