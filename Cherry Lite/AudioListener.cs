@@ -3,6 +3,7 @@ using NAudio.Wave;
 using System.Collections.Concurrent;
 using Whisper.net.Ggml;
 using Whisper.net;
+using Cherry_Lite;
 
 public class AudioListener
 {
@@ -58,6 +59,8 @@ public class AudioListener
     {
         if (!listening)
         {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Listening...");
             InitializeWaveInEvent();
             PlaySound(".\\data\\beep.mp3");
@@ -121,7 +124,7 @@ public class AudioListener
             }
 
             // Filter out text within square brackets and parentheses
-            string filteredOutput = System.Text.RegularExpressions.Regex.Replace(output, @"\[[^\]]*\]|\([^\)]*\)", "").Trim();
+            string filteredOutput = OutputCleaner.CleanString( output);
 
             if (!string.IsNullOrWhiteSpace(filteredOutput))
             {

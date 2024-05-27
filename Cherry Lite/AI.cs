@@ -47,6 +47,13 @@ public class AI
 
     public static async Task<string> GetResponse(string prompt)
     {
+
+        if (!HTTPCheck.status["XTTS"])
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("WARNING: OLLAMA - Text Generation service isnt running...");
+            return "";
+        }
         if (string.IsNullOrEmpty(prompt))
             return string.Empty;
 
@@ -97,7 +104,12 @@ public class AI
     {
         try
         {
-
+            if (!HTTPCheck.status["XTTS"])
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("WARNING: XTTS - TextToSpeech service isn't running...");
+                return "";
+            }
             var jsonContent = new StringContent(
                 $@"{{
                 ""text"": ""{text}"",

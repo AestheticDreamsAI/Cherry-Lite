@@ -1,4 +1,5 @@
-﻿using Microsoft.ML;
+﻿using Cherry_Lite;
+using Microsoft.ML;
 using Microsoft.ML.Data;
 using Newtonsoft.Json;
 using System;
@@ -135,36 +136,17 @@ public class ML
         return false;
     }
 
-    public static async Task Run(MLContext mlContext, ITransformer model, IntentCollection intents)
-    {
-        while (true)
-        {
-            var OllamaResponse = "";
-            Console.Write("You: ");
-            string userInput = Console.ReadLine();
-            if (userInput.ToLower() == "exit")
-                break;
-            OllamaResponse = await AI.GetResponse(userInput);
-            var prediction = Predict(mlContext, model, OllamaResponse);
-            var response = GenerateResponse(prediction.PredictedLabel, intents);
-
-
-            var audio = await AI.xttsRequestAndPlay(OllamaResponse);
-            NaudioToolkit.PlayAudio(audio);
-            Console.WriteLine("Bot: " + OllamaResponse);
-            ExecuteAction(prediction.PredictedLabel, intents);
-        }
-    }
-
     public static async Task Run2(MLContext mlContext, ITransformer model, IntentCollection intents, string userInput)
     {
         try
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"You: {userInput}");
 
             // Get the response from the AI model
             var ollamaResponse = await AI.GetResponse(userInput);
 
+            ollamaResponse = OutputCleaner.CleanString(ollamaResponse);
             // Perform prediction
             var prediction = Predict(mlContext, model, ollamaResponse);
 
@@ -173,6 +155,7 @@ public class ML
 
             // Request and play audio
             var audioFilePath = await AI.xttsRequestAndPlay(ollamaResponse);
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Bot: " + ollamaResponse);
             // Execute any actions based on the prediction
             ExecuteAction(prediction.PredictedLabel, intents);
@@ -188,7 +171,6 @@ public class ML
         }
         finally
         {
-            Console.WriteLine("Restarting listener...");
             Program.audioListener.StartListening();
         }
     }

@@ -21,7 +21,7 @@ class Program
         if (!File.Exists(".\\model\\"))
             Directory.CreateDirectory(".\\model\\");
         var intents = ML.LoadIntents(".\\data\\intents.json");
-
+        await HTTPCheck.Check();
         var mlContext = new MLContext();
         ITransformer model;
         // Check if the model file exists
