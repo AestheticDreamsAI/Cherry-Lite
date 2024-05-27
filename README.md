@@ -1,3 +1,5 @@
+Based on the project structure you have shown, here’s an updated README for the Cherry-Lite project, incorporating the latest features from v0.3 and aligning with the project files:
+
 # Cherry-Lite (Work in Progress)
 
 Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI framework. This project combines the main features of LAMBot-AI with additional functionalities powered by xtts-api-server, Ollama, Whisper.net, and plugin support.
@@ -11,9 +13,10 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
 
 ## Additional Features
 
+- **Whisper Transcription**: Added the ability to transcribe speech using Whisper.
 - **Text-to-Speech Integration**: Utilizes xtts-api-server for converting text responses into speech.
 - **Advanced NLP**: Incorporates ChatGPT or Ollama for more sophisticated natural language processing and understanding.
-- **Speech Recognition**: Integrates with Whisper.net for accurate speech-to-text conversion.
+- **Service Detection**: Improved detection and configuration for Ollama and XTTS services.
 - **Plugin Support**: Allows for extensibility through various plugins to add new functionalities.
 - **Audio Playback**: Uses NAudio to play text-to-speech audio responses.
 
@@ -47,7 +50,63 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
 3. **Set up additional services:**
 
     - Follow the instructions to set up [xtts-api-server](https://github.com/daswer123/xtts-api-server)
-    - Install [Ollama](https://ollama.com/)
+    - Install [Ollama](https://ollama.ai)
+
+### Prerequisites: Install and Run Ollama
+
+1. **Install Ollama:**
+   - Visit the [Ollama website](https://ollama.ai) to download and install the necessary package.
+
+2. **Start Ollama:**
+   - Open a terminal or command prompt and run:
+     ```bash
+     ollama start
+     ```
+
+### Prerequisites: Install and Run XTTS API Server
+
+1. **Install the XTTS API Server:**
+   - **Set up a Python virtual environment:**
+     ```bash
+     python -m venv venv
+     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+     ```
+   - **Install the XTTS API Server:**
+     ```bash
+     pip install xtts-api-server
+     ```
+   - **Install PyTorch and Torchaudio for GPU support (optional but recommended):**
+     ```bash
+     pip install torch==2.1.1+cu118 torchaudio==2.1.1+cu118 --index-url https://download.pytorch.org/whl/cu118
+     ```
+
+2. **Run the XTTS API Server:**
+   - Start the server:
+     ```bash
+     python -m xtts_api_server
+     ```
+   - The server runs by default on `localhost:8020`. To customize the host and port:
+     ```bash
+     python -m xtts_api_server --host 0.0.0.0 --port 8020
+     ```
+
+3. **Using Docker (Alternative Method):**
+   - Clone the repository and use Docker Compose:
+     ```bash
+     git clone https://github.com/daswer123/xtts-api-server
+     cd xtts-api-server/docker
+     docker compose build
+     docker compose up
+     ```
+   - This will also run the server on `localhost:8020` by default.
+
+4. **Ensure a Voice Sample is Added:**
+   - Add a voice sample named `cherry.wav` to the `speakers` folder inside the XTTS API Server directory. This is crucial for the Cherry-Lite assistant to generate responses correctly.
+
+5. **Access the API Documentation:**
+   - Visit [http://localhost:8020/docs](http://localhost:8020/docs) to explore the API endpoints and test the server.
+
+For detailed instructions, refer to the [XTTS API Server GitHub repository](https://github.com/daswer123/xtts-api-server).
 
 ### Usage
 
@@ -141,13 +200,8 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
     - Type `Hi` or `Hello` to receive a greeting.
     - Type `Open Notepad` to launch Notepad.
     - Type `Open browser` to launch your default browser.
+    - Type anything else and Ollama will respond.
     - Type `exit` to quit the chatbot.
-
-## Project Structure
-
-- **Program.cs**: Main program file containing the logic for training, saving, loading the model, and handling user interactions.
-- **intents.json**: JSON file containing the intents, patterns, responses, and actions.
-- **Plugins**: Directory for additional plugins to extend functionalities.
 
 ## Contributing
 
@@ -164,3 +218,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [xtts-api-server](https://github.com/daswer123/xtts-api-server) - Text-to-speech API server
 - [Whisper.net](https://github.com/sandrohanea/whisper.net) - Speech recognition framework
 - [NAudio](https://github.com/naudio/NAudio) - Audio playback framework for .NET
+
+By following these steps, you should have Cherry-Lite up and running with Ollama and the XTTS API Server properly configured. If you encounter any issues, consult the respective GitHub repositories for troubleshooting and support.
