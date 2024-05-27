@@ -60,38 +60,6 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
     {
       "intents": [
         {
-          "tag": "greeting",
-          "patterns": [
-            "Hi",
-            "Hey",
-            "How are you",
-            "Is anyone there?",
-            "Hello",
-            "Good day"
-          ],
-          "responses": [
-            "Hey :-)",
-            "Hello, thanks for visiting",
-            "Hi there, what can I do for you?",
-            "Hi there, how can I help?"
-          ]
-        },
-        {
-          "tag": "goodbye",
-          "patterns": [
-            "Bye",
-            "See you later",
-            "Goodbye",
-            "Have a nice day"
-          ],
-          "responses": [
-            "Goodbye!",
-            "See you later!",
-            "Have a great day!",
-            "Bye! Come back soon."
-          ]
-        },
-        {
           "tag": "start_program",
           "patterns": [
             "Open Notepad",
