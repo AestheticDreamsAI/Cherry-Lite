@@ -112,7 +112,7 @@ public class ML
         return "";
     }
 
-    public static void ExecuteAction(string tag, IntentCollection intents)
+    public static bool ExecuteAction(string tag, IntentCollection intents)
     {
         var intent = intents.Intents.FirstOrDefault(i => i.Tag == tag);
         if (intent != null && intent.Actions != null && intent.Actions.Count > 0)
@@ -123,13 +123,16 @@ public class ML
                 {
                     Process.Start(action);
                     Console.WriteLine($"Executing action: {action}");
+                    return true;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Failed to execute action: {action}, Error: {ex.Message}");
+
                 }
             }
-        }
+        }                   
+        return false;
     }
 
     public static async Task Run(MLContext mlContext,ITransformer model, IntentCollection intents, string ollamaModel = "llama3")
@@ -141,15 +144,13 @@ public class ML
             string userInput = Console.ReadLine();
             if (userInput.ToLower() == "exit")
                 break;
-
-            var prediction = Predict(mlContext, model, userInput);
+            OllamaResponse = await AI.GetResponse(ollamaModel, userInput);
+            var prediction = Predict(mlContext, model, OllamaResponse);
             var response = GenerateResponse(ollamaModel,prediction.PredictedLabel, intents);
-            if(!string.IsNullOrEmpty(response))
-                OllamaResponse = await AI.GetResponse(ollamaModel, $"Say the following with your own Words: '{response}'.");
-            else OllamaResponse = await AI.GetResponse(ollamaModel, userInput);
+
+
             await AI.xttsRequestAndPlay(OllamaResponse);
             Console.WriteLine("Bot: " + OllamaResponse);
-
             ExecuteAction(prediction.PredictedLabel, intents);
         }
     }
