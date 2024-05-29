@@ -1,7 +1,7 @@
 # Cherry-Lite (Work in Progress)
 A few weeks ago, I developed Cherry A.I. as an app for myself, based on Ollama, XTTS, and Llama3. You can use this app on any device, whether it's a PC or a smartphone. Unlike Cherry-Lite, which offers all the features of Cherry A.I. but lacks an app or an attractive web interface, Cherry A.I. provides a full user experience. Cherry-Lite is like Cherry A.I., but without the interface.
 
-![Cherry-A.i. Preview](https://aestheticdreams.ai/images/cherryai.png)
+![Cherry-A.i. Preview ](https://aestheticdreams.ai/images/cherryai.png)
 
 Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI framework. This project combines the main features of LAMBot-AI with additional functionalities powered by xtts-api-server, Ollama, Whisper.net, and plugin support.
 
