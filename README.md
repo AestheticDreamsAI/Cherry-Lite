@@ -6,7 +6,7 @@ Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI 
 ## Story behind Cherry A.i.
 A few weeks ago, I developed Cherry A.I. as an app for myself, based on Ollama, XTTS, and Llama3. Cherry A.I. lives in the cloud, so I can use it on any device—PC, smartphone, or smart TV—just like Tony Stark. Unlike Cherry-Lite, which has all the features of Cherry A.I. but lacks an app or a sleek web interface, Cherry A.I. offers a full user experience. Cherry-Lite is essentially Cherry A.I. without the interface or cloud capability.
 
-![Cherry-A.i. App](https://aestheticdreams.ai/images/cherryaiapp.gif)
+![Cherry-App](https://aestheticdreams.ai/images/cherryaiapp.gif)
 
 ## NOT TESTED ON LINUX OR MAC 
 Cherry-Lite is designed and optimized specifically for Windows. Compatibility with Linux and Mac systems has not been tested or verified.
