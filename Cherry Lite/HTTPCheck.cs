@@ -16,17 +16,18 @@ public class HTTPCheck
         var urls = new Dictionary<string, string>
         {
             { "Ollama", "http://localhost:11434" },
-            { "XTTS", "http://localhost:8020" }
+            { "XTTS", "http://localhost:8020/" }
         };
 
         using (HttpClient client = new HttpClient())
         {
-            client.Timeout = TimeSpan.FromSeconds(1);
+            client.Timeout = TimeSpan.FromSeconds(5);
             foreach (var kvp in urls)
             {
                 string serviceName = kvp.Key;
                 string url = kvp.Value;
-
+                if (serviceName == "XTTS")
+                    url = $"{url}docs";
                 try
                 {
                     HttpResponseMessage response = await client.GetAsync(url);
