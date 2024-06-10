@@ -1,14 +1,16 @@
 # Cherry-Lite (Work in Progress)
-A few weeks ago, I developed Cherry A.I. as an app for myself, based on Ollama, XTTS, and Llama3. You can use this app on any device, whether it's a PC or a smartphone. Unlike Cherry-Lite, which offers all the features of Cherry A.I. but lacks an app or an attractive web interface, Cherry A.I. provides a full user experience. Cherry-Lite is like Cherry A.I., but without the interface.
+Cherry-Lite is an simple AI system inspired by Jarvis, based on the LAMBot-AI framework. This project combines the main features of LAMBot-AI with additional functionalities powered by xtts-api-server, Ollama, Whisper.net, and plugin support.
 
-Cherry-Lite is an advanced AI system inspired by Jarvis, based on the LAMBot-AI framework. This project combines the main features of LAMBot-AI with additional functionalities powered by xtts-api-server, Ollama, Whisper.net, and plugin support.
-
-## Peview
 ![Cherry-Lite Preview](https://aestheticdreams.ai/images/cherrylite.gif)
 
-## NOT TESTED ON LINUX OR MAC
-Cherry-Lite is designed and optimized specifically for Windows. Compatibility with Linux and Mac systems has not been tested or verified.
+## Story behind Cherry A.i.
+A few weeks ago, I developed Cherry A.I. for myself, based on Ollama, XTTS, and Llama3. Cherry A.I. lives in the cloud, so I can use it on any device—PC, smartphone, or smart TV—just like Tony Stark. Unlike Cherry-Lite, which has all the features of Cherry A.I. but lacks an app or a sleek web interface, Cherry A.I. offers a full user experience. Cherry-Lite is essentially a Basic Version of Cherry A.I. without the interface or cloud capability.
 
+![Cherry-App](https://aestheticdreams.ai/images/cherryaiapp.gif)
+
+## NOT TESTED ON LINUX OR MAC 
+Cherry-Lite is designed and optimized specifically for Windows. Compatibility with Linux and Mac systems has not been tested or verified.
+ 
 ## Main Features
 
 - **Intent Recognition**: Uses machine learning to classify user inputs into predefined intents.
