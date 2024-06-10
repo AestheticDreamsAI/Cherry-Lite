@@ -1,6 +1,6 @@
 ﻿using NAudio.Wave;
 
-public static class NaudioToolkit
+public static class NaudioHelper
 {
     public static void PlayAudio(string filePath)
     {

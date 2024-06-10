@@ -21,7 +21,7 @@ public class HTTPCheck
 
         using (HttpClient client = new HttpClient())
         {
-            client.Timeout = TimeSpan.FromSeconds(2000);
+            client.Timeout = TimeSpan.FromSeconds(1);
             foreach (var kvp in urls)
             {
                 string serviceName = kvp.Key;

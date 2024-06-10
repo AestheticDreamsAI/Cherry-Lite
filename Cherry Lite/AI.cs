@@ -50,7 +50,7 @@ public class AI
 
         if (!HTTPCheck.status["Ollama"])
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red; 
             Console.WriteLine("WARNING: OLLAMA - Text Generation service isnt running...");
             return "";
         }
